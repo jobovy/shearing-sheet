@@ -68,3 +68,10 @@ print(gintegrate(vxvv,ts,sheet['Omega0'],sheet['A']))
 # (DeviceArray(1.9850945, dtype=float64), DeviceArray(0., dtype=float64),
 #  DeviceArray(-0.70702823, dtype=float64), DeviceArray(0.9850945, dtype=float64))
 ```
+
+Note that to get JAX to work with 64-bit precision, you need to run
+```
+from jax.config import config
+config.update("jax_enable_x64", True)
+```
+*before* doing any other JAX work (so, e.g., before importing ``shsh``). Otherwise you'll get warnings telling you that JAX only works with 32-bit floats.
