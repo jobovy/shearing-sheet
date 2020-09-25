@@ -12,7 +12,7 @@ Numpy, [JAX](https://github.com/google/jax), and galpy
 
 ## Usage
 
-The math behind the shearing sheet is contained in [this notebook](nb/shearing-sheet.ipynb).
+The math behind the shearing sheet is contained in [this notebook](nb/shearing-sheet.ipynb). A notebook with example usage can be found [here](nb/shearing-sheet-example.ipynb).
 
 ### Defining the sheet and coordinates in it
 
