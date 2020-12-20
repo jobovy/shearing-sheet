@@ -36,6 +36,7 @@ computes the shearing-sheet coordinates of the Sun. You can similarly use ``shsh
 
 To integrate the equation of motion and obtain the orbit in the shearing sheet, use ``shsh.integrate.integrate``. E.g., for the Sun's orbit
 ```
+import shsh.integrate
 ts= numpy.linspace(0.,30.,1001)
 out= shsh.integrate.integrate(vxvv,ts,sheet['Omega0'],sheet['A'])
 ```
