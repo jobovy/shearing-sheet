@@ -104,6 +104,8 @@ galpy Orbit instance
     if hasattr(R,'__len__') and len(R) > 1:
         out= Orbit([R[0],vR[0],vT[0],phi[0]])
         out.orbit= numpy.vstack((R,vR,vT,phi)).T
+        out.orbit= numpy.reshape(out.orbit,(1,*out.orbit.shape))
+        out.shape= ()
         out.t= t
         out._integrate_t_asQuantity= False
     else:
@@ -130,6 +132,14 @@ dict
     dvcircdR= 0.5*(-evaluateRforces(pot,R0,0.,use_physical=False)\
                    +R0*evaluateR2derivs(pot,R0,0.,use_physical=False))\
                    /vcirc(pot,R0,use_physical=False)
+    dR= 1e-4
+    Omega0pp= (omegac(pot,R0+dR,use_physical=False)
+               +omegac(pot,R0-dR,use_physical=False)
+               -2.*omegac(pot,R0,use_physical=False))/dR**2.
+    d4PhidR4= (evaluateR2derivs(pot,R0+dR,0,use_physical=False)
+               +evaluateR2derivs(pot,R0-dR,0,use_physical=False)
+               -2.*evaluateR2derivs(pot,R0,0,use_physical=False))/dR**2.
     return {'R0': R0,
             'Omega0': omegac(pot,R0,use_physical=False),
-            'A': 0.5*(omegac(pot,R0,use_physical=False)-dvcircdR)}
+            'A': 0.5*(omegac(pot,R0,use_physical=False)-dvcircdR),
+            'Omega0pp': Omega0pp,'d4PhidR4':d4PhidR4}
